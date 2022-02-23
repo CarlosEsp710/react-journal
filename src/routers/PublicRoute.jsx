@@ -1,5 +1,7 @@
-// import React from "react";
+import React from "react";
 
-export const PublicRoute = ({ children }) => {
-  return children;
+import { Navigate } from "react-router-dom";
+
+export const PublicRoute = ({ children, isLoggedIn }) => {
+  return isLoggedIn ? <Navigate to="/" /> : children;
 };
