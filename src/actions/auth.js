@@ -19,7 +19,7 @@ export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
 
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName));
         dispatch(finishLoading());
@@ -33,7 +33,9 @@ export const startLoginEmailPassword = (email, password) => {
 
 export const startRegisterEmailPasswordName = (email, password, name) => {
   return (dispatch) => {
-    createUserWithEmailAndPassword(auth, email, password)
+    dispatch(startLoading());
+
+    return createUserWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         await updateProfile(user, { displayName: name });
         dispatch(login(user.uid, user.displayName));
